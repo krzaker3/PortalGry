@@ -9,7 +9,7 @@ news_items = [
                      "description": "Gra strategiczna rozgrywana przez dwóch graczy",
                      "date": "",
                      "label": None,
-                     "iframe": '/index.html'
+                     "iframe": 'kk/index.html'
                  },
                  {
                     "id":2,
