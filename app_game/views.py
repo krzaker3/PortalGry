@@ -5,27 +5,27 @@ news_items = [
                  {
                      "id":1,
                      "title": "KK",
-                     "image": "https://picsum.photos/400/200?random=3",
-                     "description": "W trakcie wydarzenia zdobywasz unikalne samoloty.",
-                     "date": "10 kwietnia 2025",
+                     "image": "https://dol-ek.pl/2560-large_default/kolko-i-krzyzyk-ez-t-19e.jpg",
+                     "description": "Gra strategiczna rozgrywana przez dwóch graczy",
+                     "date": "",
                      "label": None,
-                     "iframe": 'kk/index.html'
+                     "iframe": '/index.html'
                  },
                  {
                     "id":2,
                      "title": "Snake",
-                     "image": "https://picsum.photos/400/200?random=4",
-                     "description": "",
-                     "date": "23 kwietnia 2025",
+                     "image": "https://i.ytimg.com/vi/aVPj0phGjyU/hqdefault.jpg",
+                     "description": "gra komputerowa, w której gracz kontroluje długą i cienką linię, przypominającą węża, poruszającą się po obramowanej planszy.",
+                     "date": "",
                      "label": "Akcja",
                      "iframe": 'snake/index.html'
                  },
                  {
                     "id":3,
                      "title": "Tetris",
-                     "image": "https://picsum.photos/400/200?random=5",
-                     "description": "",
-                     "date": "23 kwietnia 2025",
+                     "image": "https://images.steamusercontent.com/ugc/383161437201192360/CCE6224F8588F50D15FF809FB9B7BD2E64C32FB1/",
+                     "description": "Klasyczna gra logiczna, w której gracz kontroluje spadające klocki różnego kształtu i układa je w studni, aby tworzyć ciągłe poziome linie.",
+                     "date": "",
                      "label": None,
                       "iframe": 'tetris/index.html'
                  },

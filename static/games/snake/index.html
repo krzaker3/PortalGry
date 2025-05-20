@@ -4,45 +4,145 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
-    <script defer src="scripts.js"></script>
     <style>
-        body {
-            background-color: #f4f4f4;
-        }
-        .game-container {
-            max-width: 500px;
-            margin: 50px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
         canvas {
-            background: #ddd;
+            border: 2px solid black;
             display: block;
             margin: auto;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
         }
-        .title {
-            color: #4A90E2;
-            font-weight: bold;
-        }
-        .score {
-            font-size: 1.5em;
-            font-weight: bold;
-            margin: 10px 0;
+        #score {
+            text-align: center;
+            font-size: 20px;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="game-container">
-        <h1 class="title">Snake</h1>
-        <canvas id="gameCanvas" width="400" height="400"></canvas>
-        <p id="score" class="score">Wynik: 0</p>
-        <button class="button is-success is-fullwidth" id="restart">Restart</button>
-    </div>
+    <div id="score">Wynik: 0</div>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+        const gridSize = 20;
+        let snake = [{ x: 200, y: 200 }];
+        let direction = "RIGHT";
+        let food = randomFood();
+        let blueFood = null;
+        let score = 0;
+        let redWall = null;
+        let gameInterval = setInterval(update, 200);
+        const scoreDisplay = document.getElementById("score");
+
+        document.addEventListener("keydown", changeDirection);
+
+        function changeDirection(event) {
+            const key = event.key;
+            if (key === "ArrowUp" && direction !== "DOWN") direction = "UP";
+            if (key === "ArrowDown" && direction !== "UP") direction = "DOWN";
+            if (key === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT";
+            if (key === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
+        }
+
+        function update() {
+            let head = { ...snake[0] };
+            if (direction === "UP") head.y -= gridSize;
+            if (direction === "DOWN") head.y += gridSize;
+            if (direction === "LEFT") head.x -= gridSize;
+            if (direction === "RIGHT") head.x += gridSize;
+
+            if (head.x === food.x && head.y === food.y) {
+                score++;
+                updateScore();
+                food = randomFood();
+            } else {
+                snake.pop();
+            }
+
+            if (blueFood && head.x === blueFood.x && head.y === blueFood.y) {
+                score = Math.max(0, score - 1);
+                updateScore();
+                if (snake.length > 1) snake.pop();
+                blueFood = null;
+            }
+
+            if (redWall) {
+                if ((redWall.orientation === "horizontal" && head.y === redWall.y) ||
+                    (redWall.orientation === "vertical" && head.x === redWall.x)) {
+                    clearInterval(gameInterval);
+                    alert("Game Over!");
+                    return;
+                }
+            }
+
+            if (head.x < 0 || head.x >= 400) {
+                direction = direction === "LEFT" ? "RIGHT" : "LEFT";
+                head.x = Math.max(0, Math.min(head.x, 380));
+            }
+
+            if (head.y < 0 || head.y >= 400) {
+                direction = direction === "UP" ? "DOWN" : "UP";
+                head.y = Math.max(0, Math.min(head.y, 380));
+            }
+
+            snake.unshift(head);
+            draw();
+        }
+
+        function draw() {
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "green";
+            ctx.fillRect(food.x, food.y, gridSize, gridSize);
+
+            if (blueFood) {
+                ctx.fillStyle = "blue";
+                ctx.fillRect(blueFood.x, blueFood.y, gridSize, gridSize);
+            }
+
+            if (redWall) {
+                ctx.fillStyle = "red";
+                if (redWall.orientation === "horizontal") {
+                    ctx.fillRect(0, redWall.y, canvas.width, gridSize);
+                } else {
+                    ctx.fillRect(redWall.x, 0, gridSize, canvas.height);
+                }
+            }
+
+            ctx.fillStyle = "black";
+            snake.forEach(segment => ctx.fillRect(segment.x, segment.y, gridSize, gridSize));
+        }
+
+        function updateScore() {
+            scoreDisplay.textContent = `Wynik: ${score}`;
+        }
+
+        function randomFood() {
+            return {
+                x: Math.floor(Math.random() * 20) * gridSize,
+                y: Math.floor(Math.random() * 20) * gridSize,
+            };
+        }
+
+        function spawnRedWall() {
+            const side = Math.floor(Math.random() * 4);
+            if (side === 0) redWall = { x: 0, y: 0, orientation: "horizontal" };
+            if (side === 1) redWall = { x: 0, y: 380, orientation: "horizontal" };
+            if (side === 2) redWall = { x: 0, y: 0, orientation: "vertical" };
+            if (side === 3) redWall = { x: 380, y: 0, orientation: "vertical" };
+
+            setTimeout(() => { redWall = null; }, 10000);
+            setTimeout(spawnRedWall, Math.random() * 12000 + 1000);
+        }
+
+        function spawnBlueFood() {
+            blueFood = randomFood();
+            setTimeout(() => { blueFood = null; }, 10000);
+            setTimeout(spawnBlueFood, Math.random() * 5000 + 13000);
+        }
+
+        spawnBlueFood();
+        spawnRedWall();
+    </script>
 </body>
 </html>
