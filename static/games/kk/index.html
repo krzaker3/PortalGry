@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kółko i Krzyżyk</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+    <script defer src="scripts.js"></script>
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+        .game-container {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+        }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+            position: relative;
+        }
+        .cell {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: #f5f5f5;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .cell:hover {
+            background-color: #e0e0e0;
+            transform: scale(1.05);
+        }
+        .cell.x { color: #2196F3; }
+        .cell.o { color: #F44336; }
+
+        /* Linia przekreślająca */
+        .win-line {
+            position: absolute;
+            background: red;
+            height: 5px;
+            width: 0;
+            transition: width 0.3s ease-in-out;
+            transform-origin: left center;
+        }
+
+        #reset {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1 class="title">Kółko i Krzyżyk</h1>
+        <div id="game-status" class="notification is-info">
+            Tura gracza: <span id="current-player">X</span>
+        </div>
+        <div class="board" id="board">
+            <div class="win-line" id="win-line"></div>
+        </div>
+        <button class="button is-primary is-fullwidth" id="reset">Resetuj grę</button>
+    </div>
+</body>
+</html>

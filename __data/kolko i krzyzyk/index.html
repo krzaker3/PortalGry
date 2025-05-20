@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kółko i Krzyżyk</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+    <style>
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .cell {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            background-color: #f5f5f5;
+            border: 2px solid #363636;
+            cursor: pointer;
+        }
+        .cell:hover {
+            background-color: #e3e3e3;
+        }
+    </style>
+</head>
+<body>
+    <section class="section">
+        <div class="container has-text-centered">
+            <h1 class="title">Kółko i Krzyżyk</h1>
+            <div id="board" class="board"></div>
+            <button class="button is-primary mt-4" onclick="resetGame()">Restart</button>
+            <p class="mt-3" id="status"></p>
+        </div>
+    </section>
+
+    <script>
+        const board = document.getElementById("board");
+        const status = document.getElementById("status");
+        let currentPlayer = "X";
+        let gameBoard = ["", "", "", "", "", "", "", "", ""];
+        
+        function checkWinner() {
+            const winningCombinations = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8], 
+                [0, 3, 6], [1, 4, 7], [2, 5, 8], 
+                [0, 4, 8], [2, 4, 6]
+            ];
+            
+            for (let combo of winningCombinations) {
+                const [a, b, c] = combo;
+                if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+                    status.textContent = `Wygrał ${gameBoard[a]}!`;
+                    board.childNodes.forEach(cell => cell.removeEventListener("click", handleClick));
+                    return true;
+                }
+            }
+            
+            if (!gameBoard.includes("")) {
+                status.textContent = "Remis!";
+                return true;
+            }
+            return false;
+        }
+
+        function handleClick(event) {
+            const index = event.target.dataset.index;
+            if (!gameBoard[index]) {
+                gameBoard[index] = currentPlayer;
+                event.target.textContent = currentPlayer;
+                if (!checkWinner()) {
+                    currentPlayer = currentPlayer === "X" ? "O" : "X";
+                    status.textContent = `Tura gracza: ${currentPlayer}`;
+                }
+            }
+        }
+
+        function resetGame() {
+            gameBoard = ["", "", "", "", "", "", "", "", ""];
+            currentPlayer = "X";
+            status.textContent = "Tura gracza: X";
+            board.innerHTML = "";
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement("div");
+                cell.classList.add("cell");
+                cell.dataset.index = i;
+                cell.addEventListener("click", handleClick);
+                board.appendChild(cell);
+            }
+        }
+
+        resetGame();
+    </script>
+</body>
+</html>
