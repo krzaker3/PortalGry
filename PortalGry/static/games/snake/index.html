@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+    <script defer src="scripts.js"></script>
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+        .game-container {
+            max-width: 500px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        canvas {
+            background: #ddd;
+            display: block;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .title {
+            color: #4A90E2;
+            font-weight: bold;
+        }
+        .score {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1 class="title">Snake</h1>
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <p id="score" class="score">Wynik: 0</p>
+        <button class="button is-success is-fullwidth" id="restart">Restart</button>
+    </div>
+</body>
+</html>

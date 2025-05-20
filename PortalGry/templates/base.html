@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal gier</title>
+    <!-- Łączenie pliku CSS -->
+    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="bg-white font-sans antialiased">
+<div class="flex flex-col min-h-screen">
+    <header class="bg-white border-b border-gray-200">
+        {% include 'partials/top_bar_info.html' %}
+        {% include 'partials/top_nav.html' %}
+    </header>
+    {% block content %}
+    {% endblock %}
+</div>
+
+
+<!-- Stopka -->
+<footer class="bg-gray-900 text-gray-400 text-sm pt-10 pb-6 px-4">
+    <div class="max-w-7xl mx-auto">
+
+        <!-- Sekcja linków głównych -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 mb-10">
+
+            <!-- Kolumna: Gra -->
+            <div>
+                <div class="flex items-center gap-2 text-white mb-2">
+                    <!-- Ikona Game Controller -->
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M9 12h.01M15 12h.01M9 16h6m2 0a2 2 0 100-4H7a2 2 0 000 4h10z"/>
+                    </svg>
+                    <span>Gra</span>
+                </div>
+                <ul class="space-y-1">
+                    <li><a href="#" class="hover:text-white">O grze</a></li>
+                    <li><a href="#" class="hover:text-white">Wiadomości</a></li>
+                    <li><a href="#" class="hover:text-white">Blog Developerski</a></li>
+                    <li><a href="#" class="hover:text-white">Pojazdy wojskowe</a></li>
+                    <li><a href="#" class="hover:text-white">FAQ</a></li>
+                    <li><a href="#" class="hover:text-white">Rejestr zmian</a></li>
+                    <li><a href="#" class="hover:text-white">Gaijin Pass</a></li>
+                </ul>
+            </div>
+
+            <!-- Kolumna: Media -->
+            <div>
+                <div class="flex items-center gap-2 text-white mb-2">
+                    <!-- Ikona Video -->
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14m-6 2h4a2 2 0 002-2V8a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2z"/>
+                    </svg>
+                    <span>Media</span>
+                </div>
+                <ul class="space-y-1">
+                    <li><a href="#" class="hover:text-white">Zostań partnerem</a></li>
+                    <li><a href="#" class="hover:text-white">Filmy</a></li>
+                    <li><a href="#" class="hover:text-white">Zrzuty ekranu</a></li>
+                    <li><a href="#" class="hover:text-white">Tapety</a></li>
+                    <li><a href="#" class="hover:text-white">Soundtrack</a></li>
+                </ul>
+            </div>
+
+            <!-- Kolumna: Samouczki -->
+            <div>
+                <div class="flex items-center gap-2 text-white mb-2">
+                    <!-- Ikona Book -->
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M12 20h9M12 4h9m-9 8h9M3 6h.01M3 12h.01M3 18h.01"/>
+                    </svg>
+                    <span>Samouczki</span>
+                </div>
+                <ul class="space-y-1">
+                    <li><a href="#" class="hover:text-white">War Thunder Mobile</a></li>
+                    <li><a href="#" class="hover:text-white">Zaproś Przyjaciela</a></li>
+                    <li><a href="#" class="hover:text-white">Przydatne oprogramowanie</a></li>
+                </ul>
+            </div>
+
+            <!-- Kolumna: Warsztat -->
+            <div>
+                <div class="flex items-center gap-2 text-white mb-2">
+                    <!-- Ikona Tools -->
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M15.232 5.232l-2.464 2.464m0 0l2.464 2.464M12.768 7.696A6 6 0 1115.232 5.232M9 13h6M12 17v-4"/>
+                    </svg>
+                    <span>Warsztat</span>
+                </div>
+                <ul class="space-y-1">
+                    <li><a href="#" class="hover:text-white">CDK</a></li>
+                    <li><a href="#" class="hover:text-white">Malowania</a></li>
+                    <li><a href="#" class="hover:text-white">Misje</a></li>
+                    <li><a href="#" class="hover:text-white">Lokacje</a></li>
+                </ul>
+            </div>
+
+            <!-- Kolumna: Społeczność -->
+            <div>
+                <div class="flex items-center gap-2 text-white mb-2">
+                    <!-- Ikona User Group -->
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M17 20h5v-2a4 4 0 00-4-4h-1m-6 6v-2a4 4 0 014-4h.01M7 20H2v-2a4 4 0 014-4h1m4 0a4 4 0 00-4-4V7a4 4 0 018 0v3a4 4 0 00-4 4z"/>
+                    </svg>
+                    <span>Społeczność</span>
+                </div>
+                <ul class="space-y-1">
+                    <li><a href="#" class="hover:text-white">WT Live</a></li>
+                    <li><a href="#" class="hover:text-white">Forum</a></li>
+                    <li><a href="#" class="hover:text-white">Wiki</a></li>
+                </ul>
+            </div>
+
+            <!-- Kolumna: E-Sport -->
+            <div>
+                <div class="flex items-center gap-2 text-white mb-2">
+                    <!-- Ikona Trophy -->
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M8 21h8m-4-4v4m-4-8h8a2 2 0 002-2V5H6v6a2 2 0 002 2z"/>
+                    </svg>
+                    <span>ESport</span>
+                </div>
+                <ul class="space-y-1">
+                    <li><a href="#" class="hover:text-white">Turnieje</a></li>
+                    <li><a href="#" class="hover:text-white">Ranking</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Ikony platform -->
+        <div class="flex flex-wrap items-center justify-center gap-6 mb-6 text-gray-500">
+            <span>🪟</span>
+            <span>🍎</span>
+            <span>🐧</span>
+            <span>🎮 PS4</span>
+            <span>🎮 PS5</span>
+            <span>🎮 Xbox</span>
+            <span>🕶️ VR</span>
+        </div>
+
+        <!-- Tekst i linki -->
+        <div class="text-center text-xs text-gray-500">
+            <p class="mb-2">© 2011–2025 Gaijin Games Kft. Wszystkie prawa zastrzeżone.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#" class="hover:text-white">Regulamin</a>
+                <a href="#" class="hover:text-white">Warunki świadczenia usług</a>
+                <a href="#" class="hover:text-white">Polityka prywatności</a>
+                <a href="#" class="hover:text-white">Pomoc techniczna</a>
+            </div>
+        </div>
+    </div>
+</footer>
+    {% block extra_scripts %}
+    {% endblock %}
+</body>
+</html>
